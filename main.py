@@ -4,20 +4,22 @@ import re
 import time
 from bs4 import BeautifulSoup
 from pynput.keyboard import Key, Controller
-from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
-options = Options()
-options.add_experimental_option("detach", True)
 
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),
-                          options=options)
+
+
+from selenium import webdriver
+
+
+driver = webdriver.Firefox()
+
 
 driver.get("https://mpx.natera.com/log-in")
 
-time.sleep(20)
+time.sleep(10)
 
 user_name = driver.find_element("xpath", 
                                 "//input[contains(@id, 'email')]")
@@ -40,11 +42,11 @@ keyboard.type('Barahona@1030')
 
 time.sleep(1)
 
-log_in = driver.find_element("xpath", 
-                             "//button[contains(@class, '_button_qs46x_1 undefined _large_qs46x_9 mdc-button mdc-button--unelevated')]")
-time.sleep(1)
+# log_in = driver.find_element("xpath", 
+#                              "//button[contains(@class, 'mdc-button__label')]")
+# time.sleep(1)
 
-log_in.click()
+# log_in.click()
 
 time.sleep(30)
 
