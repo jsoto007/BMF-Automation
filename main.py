@@ -14,6 +14,9 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium import webdriver
 
 
+count = 1
+
+
 driver = webdriver.Firefox()
 
 
@@ -50,7 +53,7 @@ time.sleep(1)
 
 time.sleep(30)
 
-count = 1
+
 
 def checks_for_jobs():
 
@@ -89,7 +92,7 @@ def checks_for_jobs():
 
           # accept_btn.click()
           print(":) just accepted a job!")
-          time.sleep(1)
+          time.sleep(2)
           driver.get("https://mpx.natera.com/jobs")
           time.sleep(20)
           
@@ -105,7 +108,7 @@ starttime = time.monotonic()
 while True:
     checks_for_jobs()
     print(f"Just Checked for Jobs: {count}")
-    count = count + 1
+    count += 1
     time.sleep(1.0 - ((time.monotonic() - starttime) % 1.0))
 
     def restart_program():
@@ -116,7 +119,8 @@ while True:
         
         checks_for_jobs()
         print(f"Just Checked for Jobs FROM RESTAER:")
-        count = count + 1
+        count = 1
+        count += 1
         time.sleep(1.0 - ((time.monotonic() - starttime) % 1.0))
 
     atexit.register(restart_program)
