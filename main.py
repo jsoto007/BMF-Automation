@@ -79,7 +79,7 @@ def checks_for_jobs():
           print("No miles found error: 5555")
 
       time.sleep(1)
-      if total_miles < 60: 
+      if total_miles < 70: 
           print("I tried to click")
           job_opportunity = client_link.find_element("xpath", 
                                                     "//div[contains(@class, 'test-card__left-side')]")
@@ -111,6 +111,7 @@ while True:
     count += 1
     time.sleep(1.0 - ((time.monotonic() - starttime) % 1.0))
 
+    
     def restart_program():
       driver.get("https://mpx.natera.com/jobs")
       time.sleep(20)
@@ -118,9 +119,10 @@ while True:
       while True:
         
         checks_for_jobs()
-        print(f"Just Checked for Jobs FROM RESTAER:")
         count = 1
         count += 1
+        print(f"I am working FROM RESTAER: {count}")
         time.sleep(1.0 - ((time.monotonic() - starttime) % 1.0))
+
 
     atexit.register(restart_program)
