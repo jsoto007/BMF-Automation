@@ -3,10 +3,10 @@ import atexit
 import re
 import time
 from bs4 import BeautifulSoup
-from pynput.keyboard import Key, Controller
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
+
+from selenium import webdriver
 
 
 
@@ -15,24 +15,24 @@ from selenium import webdriver
 
 
 count = 1
+job_count = 0
 
-
-driver = webdriver.Firefox()
+driver = webdriver.Chrome()
 
 
 driver.get("https://mpx.natera.com/log-in")
 
-time.sleep(10)
+time.sleep(20)
 
 user_name = driver.find_element("xpath", 
                                 "//input[contains(@id, 'email')]")
 
-keyboard = Controller()
+# keyboard = Controller()
 user_name.click()
 
-time.sleep(1)
+time.sleep(2)
 
-keyboard.type('burdiercorp@gmail.com')
+user_name.send_keys('burdiercorp@gmail.com')
 
 time.sleep(1)
 
@@ -41,17 +41,17 @@ pass_word = driver.find_element("xpath",
 
 pass_word.click()
 
-keyboard.type('Barahona@1030')
+pass_word.send_keys('Barahona@1030')
 
 time.sleep(1)
 
-# log_in = driver.find_element("xpath", 
-#                              "//button[contains(@class, 'mdc-button__label')]")
-# time.sleep(1)
+log_in = driver.find_element("xpath", 
+                             "//button[contains(@class, '_button_emeum_1 undefined _large_emeum_9 mdc-button mdc-button--unelevated')]")
+time.sleep(1)
 
-# log_in.click()
+log_in.click()
 
-time.sleep(30)
+time.sleep(10)
 
 
 
@@ -76,7 +76,7 @@ def checks_for_jobs():
           mile = re.findall('\d+', miles)
           total_miles = int(mile[0])
       else:
-          print("No miles found error: 5555")
+          print("No miles found error: 404")
 
       time.sleep(1)
       if total_miles < 70: 
@@ -90,11 +90,15 @@ def checks_for_jobs():
                                          "//button[contains(@class, '_button_qs46x_1 undefined _medium_qs46x_5 mdc-button mdc-button--unelevated')][.//span[contains(@class, 'mdc-button__label')]][.//span[text()[contains(., 'Accept')]]]")
           time.sleep(3)
 
-          # accept_btn.click()
+          accept_btn.click()
           print(":) just accepted a job!")
+
+          global job_count
+          job_count += 1
+
           time.sleep(2)
           driver.get("https://mpx.natera.com/jobs")
-          time.sleep(20)
+          time.sleep(10)
           
           driver.switch_to.window(driver.window_handles[0])
           break
@@ -119,7 +123,7 @@ while True:
       while True:
         
         checks_for_jobs()
-        count = 1
+        global count
         count += 1
         print(f"I am working FROM RESTAER: {count}")
         time.sleep(1.0 - ((time.monotonic() - starttime) % 1.0))
